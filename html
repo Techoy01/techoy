@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Simple Money-Making Ideas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .idea-card {
+            transition: transform 0.3s ease-in-out;
+        }
+        .idea-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100">
+    <div class="relative bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+        <div 
+            class="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-20"
+            style="background-image: url('https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');"
+        ></div>
+        <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-extrabold tracking-tight text-center sm:text-5xl lg:text-6xl">
+                10 Simple Money-Making Ideas
+            </h1>
+            <p class="mt-6 max-w-3xl mx-auto text-xl text-blue-100 text-center">
+                Discover daily AI-generated ideas to kickstart your entrepreneurial journey.
+            </p>
+            <p id="lastUpdated" class="mt-4 text-center text-blue-200"></p>
+        </div>
+    </div>
 
+    <div id="ideasContainer" class="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <!-- Ideas will be dynamically inserted here -->
+    </div>
+
+    <div class="mt-8 text-center text-sm text-gray-600">
+        <p>Ideas are generated daily using AI. Check back tomorrow for new inspiration!</p>
+    </div>
+
+    <script>
+        const ideas = [
+            "Start a dog walking service",
+            "Create and sell digital planners",
+            "Offer virtual tutoring sessions",
+            "Develop a meal prep service",
+            "Start a home organizing business",
+            "Create and sell handmade crafts online",
+            "Offer freelance writing services",
+            "Start a local tour guide service",
+            "Develop a niche podcast with sponsorships",
+            "Create and sell online courses"
+        ];
+
+        function generateIdeas() {
+            return ideas.map((idea, index) => ({
+                id: index + 1,
+                idea: idea,
+                aiTool: "GPT-3 for business plan generation"
+            }));
+        }
+
+        function createIdeaCard(idea) {
+            return `
+                <div class="idea-card bg-white shadow-md rounded-lg p-4 mb-4">
+                    <h3 class="text-lg font-semibold mb-2">${idea.idea}</h3>
+                    <p class="text-sm text-gray-600 mb-2">AI Tool: ${idea.aiTool}</p>
+                    <button class="mt-2 flex items-center text-blue-500 hover:text-blue-700 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                        Share
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderIdeas() {
+            const ideasContainer = document.getElementById('ideasContainer');
+            const generatedIdeas = generateIdeas();
+            
+            let ideasHTML = '<div class="grid gap-4 md:grid-cols-2">';
+            generatedIdeas.forEach(idea => {
+                ideasHTML += createIdeaCard(idea);
+            });
+            ideasHTML += '</div>';
+
+            ideasContainer.innerHTML = ideasHTML;
+        }
+
+        function updateLastUpdated() {
+            const lastUpdated = document.getElementById('lastUpdated');
+            lastUpdated.textContent = `Last updated: ${new Date().toLocaleDateString()}`;
+        }
+
+        // Initialize the page
+        renderIdeas();
+        updateLastUpdated();
+    </script>
+</body>
+</html>
